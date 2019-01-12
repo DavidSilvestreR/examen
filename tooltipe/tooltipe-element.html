@@ -1,0 +1,74 @@
+<link rel="import" href="../polymer/polymer-element.html">
+
+<dom-module id="tooltipe-element">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+
+      .tooltipe {
+        position: absolute;
+        width: 250px;
+        border: 1px solid black;
+        background: #ccc;
+        display: none;
+       
+      }
+    </style>
+    <div class="tooltipe" id="tooltipe" >
+      <p class="title" id="titel">titulo</p>
+      <button id="closeButton">Close</button>
+    </div>
+    <div class="container" id="mycontainer">
+      <p >soy un elemento</p>
+      <div>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur repellat, voluptatibus modi aut nostrum
+        consequuntur repellendus dolores totam sit soluta dolor quidem atque veritatis minus. Ratione facilis alias
+        veniam harum.
+      </div>
+      <h2>que onda</h2>
+    </div>
+
+  </template>
+
+  <script>
+    /**
+     * `tooltipe-element`
+     * @customElement
+     * @polymer
+     * @demo demo/index.html
+     */
+    class TooltipeElement extends Polymer.Element {
+      static get is() { return 'tooltipe-element'; }
+      static get properties() {
+        return {
+          prop1: {
+            type: String,
+            value: 'tooltipe-element'
+          }
+        };
+      }
+      ready() {
+        super.ready();
+        const childElement = this.$.mycontainer
+        const button=this.$.closeButton
+        childElement.addEventListener('click', this.getclck.bind(this));
+        button.addEventListener('click', this.closeNodal.bind(this));
+       
+      }
+      getclck(event) {
+        let target = event.target || event.srcElement
+        this.$.titel.innerHTML=event.path[0].localName
+        let top=target.getBoundingClientRect().top
+        let tooltipe=this.$.tooltipe.getBoundingClientRect();
+        this.$.tooltipe.style.top=`${top-70}px`
+        this.$.tooltipe.style.display="block"
+      }
+      closeNodal(event){
+        this.$.tooltipe.style.display="none"
+      }
+    }
+    window.customElements.define(TooltipeElement.is, TooltipeElement);
+  </script>
+</dom-module>

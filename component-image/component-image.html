@@ -1,0 +1,55 @@
+<link rel="import" href="../polymer/polymer-element.html">
+<link rel="import" href="../paper-input/paper-input.html">
+<dom-module id="component-image">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+      .previw {
+        width: 100%;
+      }
+      .previw img {
+        width: 100%;
+      }
+      .containerInmages {
+        text-align: center
+      }
+    </style>
+    <h2>Hello [[prop1]]!</h2>
+    <div class="previw">
+      <img src="{{imageurl}}">
+    </div>
+    <div class="containerInmages">
+      <p class="titlelink">Link image</p>
+      <paper-input value={{imageurl}}></paper-input>
+    </div>
+  </template>
+
+  <script>
+    /**
+     * `component-image`
+     * 
+     *
+     * @customElement
+     * @polymer
+     * @demo demo/index.html
+     */
+    class ComponentImage extends Polymer.Element {
+      static get is() { return 'component-image'; }
+      static get properties() {
+        return {
+          prop1: {
+            type: String,
+            value: 'component-image'
+          },
+          imageurl: {
+            type: String,
+            value: "/src/Preview-icon.png",
+          }
+        };
+      }
+    }
+    window.customElements.define(ComponentImage.is, ComponentImage);
+  </script>
+</dom-module>

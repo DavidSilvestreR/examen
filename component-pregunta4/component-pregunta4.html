@@ -1,0 +1,80 @@
+<link rel="import" href="../polymer/polymer-element.html">
+<link rel="import" href="../iron-input/iron-input.html">
+<link rel="import" href="../paper-button/paper-button.html">
+<link rel="import" href="../../bower_components/polymer/lib/elements/dom-repeat.html">
+<dom-module id="component-pregunta4">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+      paper-button{
+        background: #ccc;
+      }
+      .container-controls{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+    </style>
+    <h1>Crea una lista separada por comas</h2>
+
+      <div class="container-controls">
+        <iron-input bind-value="{{variableOne}}">
+          <input type="text" value="{{value::input}}">
+        </iron-input>
+        <paper-button on-tap="_addArray"> add list </paper-button>
+
+      </div>
+      <h2>elemento: {{variableOne}}</h2>
+
+      <h3>Lista:</h3>
+      
+  </template>
+
+  <script>
+    /**
+     * `component-pregunta4`
+     * 
+     *
+     * @customElement
+     * @polymer
+     * @demo demo/index.html
+     */
+    class ComponentPregunta4 extends Polymer.Element {
+      static get is() { return 'component-pregunta4'; }
+      static get properties() {
+        return {
+          variableOne: {
+            type: String,
+            value: '',
+            observer: "_changedArray"
+          },
+          variabletwo: {
+            type: Number,
+            value: 0
+          },
+          myArray: {
+            type: Array,
+            value: []
+          }
+        };
+      }
+      _changedArray() {
+        this.dispatchEvent(new CustomEvent('change-value', {
+          bubbles: false,
+          composed: false,
+          detail: {
+            value: this.charger,
+            state: "charger"
+          }
+        }));
+      }
+      _addArray() {
+        this.push("myArray", this.variableOne)
+      }
+    }
+
+    window.customElements.define(ComponentPregunta4.is, ComponentPregunta4);
+  </script>
+</dom-module>
